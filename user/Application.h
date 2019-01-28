@@ -19,6 +19,15 @@ class Application : public Thread {
 private:
     Application (const Application &copy); // Verhindere Kopieren
 
+    void startPlaySoundApp();
+    void startSemaphoreApp();
+    void showMainMenu();
+    void waitForInput();
+    void nullPointerException();
+    void writeProtectionFault();
+    void memoryAllocationDemo();
+    void runGraphicsDemo();
+
 public:
     // Gib dem Anwendungsthread einen Stack.
     Application (unsigned int* stack) : Thread (stack) { }

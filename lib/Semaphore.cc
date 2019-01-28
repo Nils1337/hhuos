@@ -3,18 +3,15 @@
 #include "lib/CAS.h"
 
 void Semaphore::p() {
-    while (true) {
-        lock.acquire();
-        if (counter > 0) {
-            counter--;
-            lock.free();
-            break;
-        } else {
-            //cpu.disable_int();
-            lock.free();
-            waitQueue.enqueue(scheduler.active());
-            scheduler.block();
-        }
+    lock.acquire();
+    if (counter > 0) {
+        counter--;
+        lock.free();
+    } else {
+        cpu.disable_int();
+        lock.free();
+        waitQueue.enqueue(scheduler.active());
+        scheduler.block();
     }
 
     // while (true) {
@@ -33,10 +30,11 @@ void Semaphore::p() {
 
 void Semaphore::v () {
     lock.acquire();
-    counter++;
     if (waitQueue.count() > 0) {
         Thread *deblock = (Thread *) waitQueue.dequeue();
         scheduler.deblock(*deblock);
+    } else {
+        counter++;
     }
     lock.free();
 }

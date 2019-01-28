@@ -155,10 +155,10 @@ void pg_init() {
     // sodass genau der physikalische Adressraum abgedeckt ist?
     num_pages = total_mem/(4096*1024);
     
-    kout << "pg_init: " << total_mem << endl;
+    // kout << "pg_init: " << total_mem << endl;
     
-    kout << "   total_mem: " << total_mem << endl;
-    kout << "   #pages: " << total_mem/(4096*1024) << endl;
+    // kout << "   total_mem: " << total_mem << endl;
+    // kout << "   #pages: " << total_mem/(4096*1024) << endl;
     
 
     //

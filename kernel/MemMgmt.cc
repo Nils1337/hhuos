@@ -161,6 +161,8 @@ void * mm_alloc(unsigned int req_size) {
 
         if (prev != 0) {
             prev->next = cur->next;
+        } else {
+            free_list_start = cur->next;
         }
     }
 
@@ -174,7 +176,7 @@ void * mm_alloc(unsigned int req_size) {
  * Beschreibung:    Einen Speicherblock freigeben.                           *
  *****************************************************************************/
 void mm_free(void *ptr) {
-    kout << "mm_free: ptr= " << hex << (unsigned int)ptr << endl;
+    kout << "mm_free: ptr= " << hex << (unsigned int)ptr << dec << endl;
 
     int size = *((int *)(ptr - 4));
 

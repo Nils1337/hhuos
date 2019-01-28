@@ -15,13 +15,7 @@
 #include "kernel/MemMgmt.h"
 #include "kernel/Paging.h"
 #include "user/Application.h"
-
-
-// Hilfsfunktion: Auf Return-Taste warten
-void waitForReturn() {
-    kb.lastKey='*'; // lastKey loeschen
-    while (kb.lastKey!=(char)10) ; // dauernd abfrage (schlechter Stil)
-}
+#include "user/PlaySound.h"
 
 
 // Stack fuer den Hauptthread der Anwendung
@@ -34,22 +28,6 @@ int main() {
 
     // Speicherverwaltung initialisieren
     mm_init();
-    
-    // Startmeldung ausgeben
-    kout << "HHUos 0.9" << endl << "=========" << endl << endl;
-    kout << "Freier Speicher: " << (total_mem/1024) << " KB" << endl << endl;
-
-    kout << "Unterstuetzte Funktionen:" << endl;
-    kout << "   - Bildschirmausgaben" << endl;
-    kout << "   - Sound ueber den PC-Lautsprecher" << endl;
-    kout << "   - Tastatureingaben per Interrupt" << endl;
-    kout << "   - Preemptives Multitasking" << endl;
-    kout << "   - VESA ueber BIOS" << endl;
-    kout << "   - Einfache Heap-Verwaltung" << endl;
-    kout << "   - Paging und Bluescreen" << endl;
-    kout << endl;
-    kout.flush ();
-
 
     // Tastatur-Unterbrechungsroutine einstoepseln
     kb.plugin ();
@@ -63,16 +41,13 @@ int main() {
     // Interrupts erlauben (Tastatur)
     cpu.enable_int ();
 
-    kout << "Bitte <ENTER> druecken um fortzufahren." << endl;
-    waitForReturn();
-    kout.clear ();
-    
-    // Anwendung im Scheduler anmelden
-    Application demoApp(&appl_stack[1024]);
-    scheduler.Scheduler::ready(demoApp);
-    
+    Application app(&appl_stack[1023]);
+    scheduler.ready(app);
+
     // Scheduler starten
     scheduler.schedule ();
 
     return 0;
  }
+
+

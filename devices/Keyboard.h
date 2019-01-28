@@ -14,6 +14,7 @@
 #include "devices/Key.h"
 #include "kernel/IOport.h"
 #include "kernel/interrupts/ISR.h"
+#include "lib/CAS.h"
 
 class Keyboard : public ISR {
     
@@ -66,11 +67,14 @@ private:
     // Ermittelt anhand von Tabellen den ASCII-Code.
     void get_ascii_code ();
     
+    char lastKey;
     
 public:
 
-   char lastKey;
-   
+   char get_last_key() {
+       return S(&lastKey, '\0');
+   }
+
    // Initialisierung der Tastatur.
    Keyboard ();
 

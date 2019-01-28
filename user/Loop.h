@@ -14,15 +14,17 @@
 #define __loop_include__
 
 #include "kernel/threads/Thread.h"
+#include "lib/Semaphore.h"
 
 class Loop : public Thread {
 
 private:
     int id;
     int counter;
+    Semaphore *s;
 
 public:
-    Loop (int id, unsigned int* stack): Thread(stack), id(id)  {
+    Loop (int id, unsigned int* stack, Semaphore *s): Thread(stack), id(id), s(s)  {
         counter = 0;
     }
 

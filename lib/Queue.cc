@@ -3,12 +3,10 @@
 
 int Queue::count() {
     int size = 0;
-    if (head != 0) {
-        Chain *cur = head;
-        do {
-            size++;
-            cur = cur->next;
-        } while (cur != 0);
+    Chain *cur = head;
+    while (cur != 0) {
+        cur = cur->next;
+        size++;
     }
 
     return size;

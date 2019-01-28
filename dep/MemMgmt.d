@@ -5,4 +5,5 @@ build/MemMgmt.o: kernel/MemMgmt.cc kernel/Globals.h kernel/CPU.h \
  kernel/interrupts/IntDispatcher.h kernel/interrupts/ISR.h kernel/BIOS.h \
  devices/PIT.h kernel/IOport.h devices/PCSPK.h devices/CGA_Stream.h \
  devices/CGA.h lib/OutStream.h lib/StringBuffer.h devices/Keyboard.h \
- devices/Key.h devices/VESA.h devices/LFBgraphics.h kernel/MemMgmt.h
+ devices/Key.h lib/CAS.h devices/VESA.h devices/LFBgraphics.h \
+ kernel/MemMgmt.h

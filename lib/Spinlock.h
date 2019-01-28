@@ -1,3 +1,6 @@
+#ifndef __Spinlock_include__
+#define __Spinlock_include__
+
 class Spinlock {
 
     private:
@@ -9,3 +12,5 @@ class Spinlock {
     void acquire();
     void free();
 };
+
+#endif

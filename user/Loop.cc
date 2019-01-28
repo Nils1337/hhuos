@@ -12,20 +12,13 @@
 
 #include "user/Loop.h"
 #include "kernel/Globals.h"
-#include "lib/Semaphore.h"
-
-Semaphore *s = new Semaphore(1);
-Spinlock *lock = new Spinlock();
 
 void Loop::run() {
-    //while (true) {
-    for (unsigned int i = 0; i < 100000000; i++) {
-        //lock->acquire();
+    while (true) {
         s->p();
         kout.setpos(12 + (id * 20), 10);
         kout << "Loop [" << id << "]: " << counter++;
         kout.flush();
         s->v();
-        //lock->free();
     }
 } 

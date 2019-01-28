@@ -16,8 +16,6 @@
 
 // Hilfsfunktionen um Farbwerte fuer einen Pixel zu erzeugen
 #define RGB_24(r,g,b) (unsigned int) ((r << 16) + (g << 8) + b )
-
-
 class LFBgraphics {
     
 private:
@@ -32,7 +30,9 @@ public:
     
     LFBgraphics () {}
     
-    void drawPixel        (int x,  int y,  int col);
+    void drawPixel(int x,  int y,  int col);
+    void drawSprite();
+    void drawRect(int x, int y, int width, int height, int col);
 
     /* hier koennen weitere eigene Grafikfunktionen implementiert werden */
 };

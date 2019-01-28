@@ -11,7 +11,26 @@
  *****************************************************************************/
 
 #include "devices/LFBgraphics.h"
+#include "user/hhu.cc"
 
+void LFBgraphics::drawSprite() {
+    for (int x = 0; x < hhu.width; x++) {
+        for (int y = 0; y < hhu.height; y++) {
+            int pos = hhu.bytes_per_pixel * (x + y * hhu.width);
+            int col = hhu.pixel_data[pos] | (hhu.pixel_data[pos] << 8) | (hhu.pixel_data[pos] << 16);
+            drawPixel(x, y, col);
+        }
+    }
+}
+
+
+void LFBgraphics::drawRect(int x, int y, int width, int height, int col) {    
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width; j++) {
+            drawPixel(x + j, y + i, col);
+        }
+    }
+}
 
 /*****************************************************************************
  * Methode:         LFBgraphics::drawPixel                                   *
