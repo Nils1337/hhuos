@@ -21,8 +21,8 @@ Scheduler        scheduler;     // Scheduler
 BIOS             bios;          // Schnittstelle zum 16-Bit BIOS
 unsigned int     total_mem;     // RAM total
 unsigned long    systime=0;     // wird all 10ms hochgezaehlt
-bool             forceSwitch=0; // gesetzt in Timer-Interrupt,
-                                // wenn Thread-Wechsel erfolgen soll
+bool             forceSwitch=0; // gesetzt in Timer-Interrupt, wenn Thread-Wechsel erfolgen soll
+MemMgmt          mm;                                
 
 //
 // Geräte-Treiber-Klassen

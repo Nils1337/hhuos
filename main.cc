@@ -27,7 +27,7 @@ int main() {
     kout.clear ();
 
     // Speicherverwaltung initialisieren
-    mm_init();
+    mm.init();
 
     // Tastatur-Unterbrechungsroutine einstoepseln
     kb.plugin ();

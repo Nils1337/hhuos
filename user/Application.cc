@@ -91,22 +91,57 @@ void Application::runGraphicsDemo() {
 
 void Application::memoryAllocationDemo() {
     kout.clear();
-    mm_dump_free_list();
+    mm.debug = true;
+    mm.dump_free_list();
+    kout << endl;
+
     int *arr1 = new int[128];
-    mm_dump_free_list();
-    int *arr2 = new int[128];
-    mm_dump_free_list();
+    mm.dump_free_list();
+    kout << endl;
+
+    kout << "Continue?" << endl;
+    while (kb.get_last_key() != '\n');
+
+    int *arr2 = new int[512];
+    mm.dump_free_list();
+    kout << endl;
+
+    kout << "Continue?" << endl;
+    while (kb.get_last_key() != '\n');
+
     delete []arr1;  
-    mm_dump_free_list();
+    mm.dump_free_list();
+
+    kout << "Continue?" << endl;
+    while (kb.get_last_key() != '\n');
+
+    int *arr3 = new int[10000];
+    mm.dump_free_list();
+
+    kout << "Continue?" << endl;
+    while (kb.get_last_key() != '\n');
+
+    delete []arr3;  
+    mm.dump_free_list();
+    kout << endl;
+    
+    kout << "Continue?" << endl;
+    while (kb.get_last_key() != '\n');
+
     delete []arr2;
-    mm_dump_free_list();
-    while (kb.get_last_key() != '\b');
+    mm.dump_free_list();
+    kout << endl;
+    
+    kout << "Finished" << endl;
+
+    while (kb.get_last_key() != '\n');
+    mm.debug = false;
  }
 
  void Application::showMainMenu() {
     kout.clear ();
 
-    kout << "HHUos 1.0" << endl << "=========" << endl << endl;
+    kout << "HHUos 1.0 (Nils Axer)" << endl << "=========" << endl << endl;
     kout << "Demos:" << endl;
     kout << "[1] - Sound abspielen" << endl;
     kout << "[2] - Grafikmodus einschalten" << endl;

@@ -44,17 +44,36 @@
 
 
 // max. Groesse des Heaps
-extern unsigned int mm_heap_size;
 
-struct free_block {
-    int size;
-    free_block *next;
+class MemMgmt {
+private:
+    struct free_block {
+        int size;
+        free_block *next;
+    };
+
+    // zeigt an, ob die Speicherverwaltung initialisiert wurde.
+    unsigned int initialized;
+
+    // max. Groesse des Heaps
+    unsigned int mm_heap_size;
+
+    free_block *free_list_start;
+
+public:
+    MemMgmt(): debug(false), mm_heap_size(0), initialized(0) {};
+
+    // Initialisieren der Speicherverwaltung
+    void init();
+
+    void *alloc(unsigned int req_size);
+
+    void free(void *ptr);
+
+    // Ausgabe des Heap-Zustands
+    void dump_free_list();
+
+    bool debug;
 };
-
-// Initialisieren der Speicherverwaltung
-void mm_init();
-
-// Ausgabe des Heap-Zustands
-void mm_dump_free_list();
 
 #endif

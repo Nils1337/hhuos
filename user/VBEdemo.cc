@@ -63,7 +63,7 @@ void VBEdemo::drawColors () {
 void VBEdemo::run () {
 
     drawColors();
-    //vesa.init(MODE_640_480_24BITS);
+
     vesa.drawSprite();
     vesa.drawRect(490, 0, 150, 150, 0x00ff);
 
